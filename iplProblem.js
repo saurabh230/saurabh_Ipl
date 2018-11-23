@@ -1,3 +1,4 @@
+
 var fs = require('fs')
 var match=fs.readFileSync('matches.csv', 'utf8');
 var arr=match.split('\n');
@@ -116,30 +117,11 @@ console.log("-----------------------------------------------------------");
 console.log('4). The year 2015 the top economical bowlers');
 console.log("-----------------------------------------------------------");
 
-/*var obj4={};
-var arrOfMatchId1=[];
-for(let i=1;i<matches.length;i++){
-    if(parseInt(matches[i][1])===2015){
-        arrOfMatchId1.push(matches[i][0]);
-    }
-}
-let max=parseInt(arrOfMatchId1[arrOfMatchId1.length-1]);
-let min=parseInt(arrOfMatchId1[0]);
-
-for(let i=0;i<deliveries.length;i++){
-    let del=parseInt(deliveries[i][0]);
-    if(del>=min&&del<=max){
-        
-
-
-    }
-}*/
+var obj4={};
 var matchIdSeason = getKeyValue();
-function getKeyValue()
-{
+function getKeyValue(){
     var ob = {};
-    for(var i=1;i<matches.length;i++)
-    {
+    for(var i=1;i<matches.length;i++){
         ob[matches[i][0]]=matches[i][1];
     }
     return ob;
@@ -158,37 +140,44 @@ for(var i=0;i<bowlers.length;i++){
    var overs = del/6;   
     bowlerObj[bowlers[i]]=(runs/overs);
 }
-var sortBwlr = [];
+function sortValues(){
+    var sortBwlr = [];
 for (var bwlr in bowlerObj) {
-   sortBwlr.push([bwlr, bowlerObj[bwlr]]);
+    sortBwlr.push([bwlr, bowlerObj[bwlr]]);
 }
+
+sortBwlr.sort(function(a, b) {
+    return a[1] - b[1];
+});
+    return sortBwlr;
+}
+
 function getBowlers(){
-   var ar1 = [];
-   for(var i=1;i<deliveries.length;i++){
-       if(matchIdSeason[deliveries[i][0]]=='2015'){
-           ar1.push(deliveries[i][8]);
-       }
-   }
-   var bowler = [];
-   for(var i=0;i<ar1.length;i++){
-       var count = 0;
-       for(var j=i+1;j<ar1.length;j++){
-           if(ar1[i]==ar1[j]){
-               count++;
-               break;
-           }
-       }
-       if(count==0)
-           bowler.push(ar1[i]);
-   }
-   return bowler;
-}
-var obj4={};
-for(var i=0;i<10;i++)
-{
+    var ar1 = [];
+    for(var i=1;i<deliveries.length;i++){
+        if(matchIdSeason[deliveries[i][0]]=='2015'){
+            ar1.push(deliveries[i][8]);
+        }
+    }
+    var bowler = [];
+    for(var i=0;i<ar1.length;i++){
+        var count = 0;
+        for(var j=i+1;j<ar1.length;j++){
+            if(ar1[i]==ar1[j]){
+                count++;
+                break;
+            }
+        }
+        if(count==0)
+            bowler.push(ar1[i]);
+    }
+    return bowler;
+ }
+ 
+var sortBwlr =sortValues();
+for(var i=0;i<10;i++){    
     var str = sortBwlr[i].toString();
     var temp = str.split(',');
-
     obj4[temp[0]]=temp[1];
 }
 console.log(obj4);
