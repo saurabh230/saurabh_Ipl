@@ -38,6 +38,7 @@ for(let j=1;j<arr.length;j++){
     if(count!==0)
     obj[y]=count;
 }
+for(var g in obj){
 for(let j=1;j<arr.length;j++){
     var z=arrWinner[j];
     if(b===z){
@@ -50,6 +51,7 @@ for(let j=1;j<arr.length;j++){
     }
     if(countw!==0&&z!==undefined)
     objWinner[z]=countw;
+}
 }
 console.log("1). The number of matches played per year of all the years in IPL")
 console.log(obj)
